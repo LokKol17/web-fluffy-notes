@@ -19,11 +19,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "reactfire";
+import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).max(100),
-});
+const formSchema = z
+  .object({
+    nickname: z.string().min(2, 'O apelido deve ter pelo menos 2 caracteres.'),
+    email: z.string().email(),
+    password: z.string().min(8).max(100),
+    confirmPassword: z.string().min(8).max(100),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não coincidem.",
+    path: ["confirmPassword"],
+  });
 
 interface SignUpFormProps {
   onShowLogin: () => void;
@@ -36,27 +44,35 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      nickname: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
   const auth = useAuth();
+  const firestore = getFirestore();
 
-  const signup = async ({ email, password }: z.infer<typeof formSchema>) => {
+  const signup = async ({ email, password, nickname }: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
       const user = await createUserWithEmailAndPassword(auth, email, password);
       if (user?.user.uid && user.user.email) {
-        // create user in firestore here if you want
-        toast({ title: "Account created!" });
+        await setDoc(doc(firestore, "users", user.user.uid), {
+          createdAt: serverTimestamp(),
+          email: user.user.email,
+          name: nickname,
+          photoURL: user.user.photoURL ?? null,
+        });
+        toast({ title: "Conta criada!" });
         onSignUp?.();
       }
     } catch (err: any) {
       if ("code" in err && err.code.includes("already")) {
-        toast({ title: "User already exists" });
+        toast({ title: "Esse usuário já existe." });
       } else {
-        toast({ title: "Error signing up", description: `${err}` });
+        toast({ title: "Erro ao se registar: ", description: `${err}` });
       }
     } finally {
       setIsLoading(false);
@@ -70,16 +86,29 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
           <fieldset disabled={isLoading} className="space-y-4">
             <FormField
               control={form.control}
+              name="nickname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Apelido</FormLabel>
+                  <FormControl>
+                    <Input type="text" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Como você gostaria de ser chamado?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input type="email" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    A valid email is required to watch locked specials.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -89,26 +118,42 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onShowLogin, onSignUp }) => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Senha</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Must be at least 8 characters long.
+                    Deve ter no mínimo 8 caracteres.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Sign Up</Button>
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirmar Senha</FormLabel>
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Digite novamente a senha para confirmar.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Registrar</Button>
           </fieldset>
         </form>
       </Form>
 
       <p className="mt-4 text-sm">
-        Already joined?{" "}
+        Já tem uma conta?{" "}
         <Button variant="link" onClick={onShowLogin}>
-          Sign in instead.
+          Faça login então.
         </Button>
       </p>
     </>

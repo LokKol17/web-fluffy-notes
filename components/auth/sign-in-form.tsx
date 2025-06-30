@@ -48,11 +48,11 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       toast({
-        title: "Success!",
-        description: "You have been signed in.",
+        title: "Sucesso!",
+        description: "Você está logado com sucesso.",
       });
     } catch (error) {
-      toast({ title: "Error Signing In", description: `${error}` });
+      toast({ title: "Erro ao logar: ", description: `${error}` });
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +67,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input type="email" {...field} />
                 </FormControl>
@@ -80,7 +80,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -89,20 +89,20 @@ export const SignInForm: FC<SignInFormProps> = ({ onShowSignUp }) => {
             )}
           />
           <Button type="submit" disabled={isLoading}>
-            Submit
+            Enviar
           </Button>
         </form>
       </Form>
       <p className="mt-4 text-sm">
-        Forgot password?{" "}
+        Esqueceu sua senha?{" "}
         <Button variant="link" onClick={() => setIsResetOpen(true)}>
-          Reset
+          Redefina-a
         </Button>
       </p>
       <p className="text-sm">
-        Not a member?{" "}
+        Ainda não é um membro?{" "}
         <Button variant="link" onClick={onShowSignUp}>
-          Sign up instead.
+          Se registre então.
         </Button>
       </p>
       <ModalForgotPassword isOpen={isResetOpen} setIsOpen={setIsResetOpen} />

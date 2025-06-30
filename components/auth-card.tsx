@@ -20,16 +20,16 @@ export const AuthCard = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/app");
+      router.push("/");
     }
   }, [user]);
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>{isShowingSignUp ? "Sign Up" : "Sign In"}</CardTitle>
+          <CardTitle>{isShowingSignUp ? "Registre-se" : "Login"}</CardTitle>
           <CardDescription>
-            Give them a reason to {isShowingSignUp ? "sign up" : "sign in"}.
+            Acesse o melhor aplicativo de anotações do mundo!
           </CardDescription>
         </CardHeader>
         <CardContent>

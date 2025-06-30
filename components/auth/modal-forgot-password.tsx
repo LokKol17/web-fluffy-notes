@@ -32,12 +32,12 @@ export const ModalForgotPassword: FC<ModalChangePasswordProps> = ({
       setIsLoading(true);
       await sendPasswordResetEmail(auth, email);
       toast({
-        title: "Success!",
-        description: "Password reset email sent; please check your inbox.",
+        title: "Sucesso!",
+        description: "Um link de redefinição de senha foi enviado para o seu email.",
       });
       setIsOpen(false);
     } catch (error) {
-      toast({ title: "Error", description: `${error}` });
+      toast({ title: "Erro: ", description: `${error}` });
     } finally {
       setIsLoading(false);
     }
@@ -48,13 +48,13 @@ export const ModalForgotPassword: FC<ModalChangePasswordProps> = ({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Forgot password?</DialogTitle>
+            <DialogTitle>Esqueceu sua senha?</DialogTitle>
             <DialogDescription>
-              Enter your email to reset your password
+              Insira seu endereço de email abaixo.
             </DialogDescription>
           </DialogHeader>
 
-          <Label htmlFor="email">Email address</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)}
@@ -64,11 +64,11 @@ export const ModalForgotPassword: FC<ModalChangePasswordProps> = ({
             required
           />
 
-          <p className="text-[0.8rem] text-white/60 -mt-3">
-            We will send you a link to reset your password
+          <p className="text-[0.8rem] -mt-3">
+            Enviaremos um link para redefinir sua senha.
           </p>
           <Button disabled={isLoading} onClick={() => onSubmit()}>
-            Submit
+            Enviar
           </Button>
         </DialogContent>
       </Dialog>
