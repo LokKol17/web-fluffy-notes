@@ -1,34 +1,72 @@
-# Venefish 🐟
+# Fluffy Notes
 
-### Boilerplate for React TypeScript projects using Next.js, shadcn/ui, Tailwind and Firebase on Vercel!
+Fluffy Notes é um aplicativo web de anotações fofinhas, feito com Next.js, Firebase, React, Tailwind CSS e shadcn/ui.
 
-> Now using Next.js app router!
+## Funcionalidades
+- Cadastro e login de usuários (email/senha)
+- Recuperação de senha
+- Criação, edição e exclusão de notas
+- Seleção de "mood" para cada nota
+- Favoritar notas
+- Visualização de notas sumarizadas
+- Interface responsiva e animada
 
-This stack is 🔥 because projects can be built and deployed for free until you get to higher tiers within Vercel/Firebase which only happens once you get lots of DAUs.
+## Tecnologias
+- Next.js
+- React
+- Firebase (Auth & Firestore)
+- Tailwind CSS
+- shadcn/ui
+- Reactfire
 
-- **Ve**rcel for cloud and automated deployments
-- **Ne**xt.js for better React
-- **Fi**rebase for auth and database (Firestore)
-- **Sh**adcn and Tailwind for UI/styling
+## Como rodar localmente
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repo>
+   cd fluffy-notes
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   # ou
+   yarn
+   ```
+3. Configure o Firebase:
+   - Crie um projeto no [Firebase Console](https://console.firebase.google.com/)
+   - Ative Auth (Email/Senha) e Firestore
+   - Copie as credenciais para o arquivo de configuração em `components/firebase-providers.tsx`
+   - Ajuste as regras do Firestore conforme o README ou sua necessidade
+4. Rode o projeto:
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
+5. Acesse [http://localhost:3000](http://localhost:3000)
 
-**Let me know if you have any questions! Godspeed.**
+## Estrutura de coleções do Firestore
+- `users`: dados do usuário (name, email, photoURL...)
+- `notes`: cada nota com title, content, moodId, userId, createdAt, favorite
+- `moods`: lista de moods disponíveis (name, color, imageURL)
 
-## Setup
+## Regras recomendadas do Firestore
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /notes/{noteId} {
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    match /moods/{moodId} {
+      allow read: if true;
+    }
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
 
-1. Make sure your Firebase project has authentication added
-1. Get your public Firebase config and paste it into `components\firebase-providers.tsx`
-1. `npm i` and `npm run dev`
-
-The following is only needed if you want to use `firebase/admin` (not part of this project by default)
-
-1. Create a new file at the root level called `.env.local`
-1. Define a new variable there called `FIREBASE_ADMIN_SDK`
-1. Get your Firebase service account private key and stringify it then set the above variable to that string
-   > e.g.: `FIREBASE_ADMIN_SDK={"type":"service_account","project_id":"sleeptoken",...}`
-
-### Notes
-
-- You can use `api/test.ts` to stringify your private key so you can use in in the environment
-- You need to define the same `FIREBASE_ADMIN_SDK` environment variable in Vercel
-
-**Created by [⬡ Enesien Software](https://enesien.com)**
+## Licença
+MIT
