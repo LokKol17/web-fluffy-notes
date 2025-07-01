@@ -17,7 +17,7 @@ export default function Note({ title, text, date, time, imageUrl, favorite, onCl
             className="relative text-[#655167] w-96 h-48 flex flex-col items-start justify-start p-4 bg-[#F5D1E880] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
             onClick={onClick}
         >
-            <h2 className="text-lg font-semibold mb-2">{title}</h2>
+            <h2 className="text-lg font-semibold mb-2 h-[28px] overflow-hidden line-clamp-1">{title}</h2>
             <p className="text-sm h-16 line-clamp-3">{text}</p>
             <p className="absolute -top-2 -right-4 text-lg font-bold" style={{ transform: 'rotate(15deg)' }}>{date}</p>
             <p className="absolute top-3 -right-2" style={{ transform: 'rotate(15deg)' }}>{time}</p>
