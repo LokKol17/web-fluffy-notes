@@ -21,7 +21,7 @@ export default function Note({ title, text, date, time, imageUrl, favorite, onCl
                 color: "var(--theme-text, #655167)"
             }}
         >
-            <h2 className="text-lg font-semibold mb-2">{title}</h2>
+            <h2 className="text-lg font-semibold mb-2 h-[28px] overflow-hidden line-clamp-1">{title}</h2>
             <p className="text-sm h-16 line-clamp-3">{text}</p>
             <p className="absolute -top-2 -right-4 text-lg font-bold" style={{ transform: 'rotate(15deg)' }}>{date}</p>
             <p className="absolute top-3 -right-2" style={{ transform: 'rotate(15deg)' }}>{time}</p>
