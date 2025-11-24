@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,69 +9,159 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
+
+    /* Theme variables - defaults (Hello Kitty) */
+    --theme-primary: #FF69B4;
+    --theme-secondary: #FFB6C1;
+    --theme-accent: #FF1493;
+    --theme-background: #FFF0F5;
+    --theme-text: #8B008B;
+    --theme-card-bg: #FFB6C180;
+    --theme-wallpaper: url('/hello-kitty-bg.png');
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
+
+  /* Hello Kitty Theme */
+  [data-theme="hello-kitty"] {
+    --theme-primary: #FF69B4;
+    --theme-secondary: #FFB6C1;
+    --theme-accent: #FF1493;
+    --theme-background: #FFF0F5;
+    --theme-text: #8B008B;
+    --theme-card-bg: #FFB6C180;
+    --theme-wallpaper: url('/hello-kitty-bg.png');
+  }
+
+  /* My Melody Theme */
+  [data-theme="my-melody"] {
+    --theme-primary: #FFB6C1;
+    --theme-secondary: #FFC0CB;
+    --theme-accent: #FF69B4;
+    --theme-background: #FFF5F8;
+    --theme-text: #8B4A8B;
+    --theme-card-bg: #FFC0CB80;
+    --theme-wallpaper: url('/my-melody-bg.png');
+  }
+
+  /* Kuromi Theme */
+  [data-theme="kuromi"] {
+    --theme-primary: #8B008B;
+    --theme-secondary: #BA55D3;
+    --theme-accent: #9370DB;
+    --theme-background: #1a0a1a;
+    --theme-text: #E6E6FA;
+    --theme-card-bg: #8B008B80;
+    --theme-wallpaper: url('/kuromi-bg.png');
+  }
+
+  /* Cinnamonroll Theme */
+  [data-theme="cinnamonroll"] {
+    --theme-primary: #4cb5e8;
+    --theme-secondary: #c1e7f5;
+    --theme-accent: #e9dcef;
+    --theme-background: #fbd8de;
+    --theme-text: #2c5282;
+    --theme-card-bg: #c1e7f580;
+    --theme-wallpaper: url('/cinnamonroll-bg.png');
+  }
+
+  /* Pompompurin Theme */
+  [data-theme="pompompurin"] {
+    --theme-primary: #FFD700;
+    --theme-secondary: #FFFFE0;
+    --theme-accent: #FFA500;
+    --theme-background: #FFFAF0;
+    --theme-text: #8B4513;
+    --theme-card-bg: #FFD70080;
+    --theme-wallpaper: url('/pompompurin-bg.png');
+  }
+
+  /* Keroppi Theme */
+  [data-theme="keroppi"] {
+    --theme-primary: #32CD32;
+    --theme-secondary: #98FB98;
+    --theme-accent: #228B22;
+    --theme-background: #F0FFF0;
+    --theme-text: #006400;
+    --theme-card-bg: #98FB9880;
+    --theme-wallpaper: url('/keroppi-bg.png');
+  }
+
+  /* Pochacco Theme */
+  [data-theme="pochacco"] {
+    --theme-primary: #1a202c;
+    --theme-secondary: #2d3748;
+    --theme-accent: #4a90e2;
+    --theme-background: #f7fafc;
+    --theme-text: #2d3748;
+    --theme-card-bg: #e2e8f080;
+    --theme-wallpaper: url('/pochacco-bg.png');
+  }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    color: #DC93BA;
+    color: var(--theme-text, #8B008B);
+    background-image: var(--theme-wallpaper);
+    background-size: auto;
+    background-repeat: repeat;
+    background-position: center;
   }
 }

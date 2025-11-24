@@ -75,7 +75,7 @@ export default function ViewNote() {
 
     return (
         <div className="flex flex-col items-center justify-start min-h-screen mt-40 px-4 py-8">
-            <div className="bg-white/80 rounded-lg shadow-md p-8 w-full max-w-lg flex flex-col gap-6 relative">
+            <div className="rounded-lg shadow-md p-8 w-full max-w-lg flex flex-col gap-6 relative" style={{ backgroundColor: "var(--theme-card-bg, #FFB6C180)" }}>
                 <button
                     className="absolute top-4 left-4 text-yellow-400 hover:text-yellow-500 text-2xl"
                     onClick={handleToggleFavorite}

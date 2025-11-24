@@ -14,8 +14,12 @@ interface NoteProps {
 export default function Note({ title, text, date, time, imageUrl, favorite, onClick }: NoteProps) {
     return (
         <div
-            className="relative text-[#655167] w-96 h-48 flex flex-col items-start justify-start p-4 bg-[#F5D1E880] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            className="relative w-96 h-48 flex flex-col items-start justify-start p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
             onClick={onClick}
+            style={{
+                backgroundColor: "var(--theme-card-bg, #F5D1E880)",
+                color: "var(--theme-text, #655167)"
+            }}
         >
             <h2 className="text-lg font-semibold mb-2">{title}</h2>
             <p className="text-sm h-16 line-clamp-3">{text}</p>

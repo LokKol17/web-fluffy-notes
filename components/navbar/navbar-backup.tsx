@@ -39,26 +39,44 @@ export const NavBar: FC = () => {
       <nav className="flex w-full px-6 md:px-8 py-4 justify-between">
         <div className="flex items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity">
-            <div className="flex items-center text-3xl" style={{ color: "var(--theme-primary, #DC93BA)" }}>
+            <div className="flex items-center text-3xl">
               Fluffy Notes | <span className="text-2xl ml-3">O Mundo das Notas Fofinhas!</span>
             </div>
           </Link>
         </div>
         <div className="px-6 md:px-8 py-4 flex items-center gap-4">
-          <span className="font-semibold text-[#DC93BA] text-lg">
+          <ThemeSelector />
+          <span className="font-semibold text-[var(--theme-primary,#DC93BA)] text-lg">
             {nickname || user.displayName || user.email || "Usuário"}
           </span>
-          <ThemeSelector />
-                      <button
-              className="font-bold py-2 px-4 rounded transition-colors"
-              style={{
-                backgroundColor: "var(--theme-primary, #FF69B4)",
-                color: "white"
-              }}
-              onClick={handleLogout}
-            >
-              Sair
-            </button>
+          <button
+            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition-colors"
+            onClick={handleLogout}
+          >
+            Sair
+          </button>
+        </div>
+      </nav>
+    </div>
+  );
+};
+        <div className="flex items-center">
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <div className="flex items-center text-3xl">
+              Fluffy Notes | <span className="text-2xl ml-3">O Mundo das Notas Fofinhas!</span>
+            </div>
+          </Link>
+        </div>
+        <div className="px-6 md:px-8 py-4 flex items-center gap-4">
+          <span className="font-bold mr-4 text-[#DC93BA] text-xl">
+            {nickname || user.displayName || user.email || "Usuário"}
+          </span>
+          <button
+            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition-colors"
+            onClick={handleLogout}
+          >
+            Sair
+          </button>
         </div>
       </nav>
     </div>

@@ -82,7 +82,10 @@ export default function Home() {
       </div>
 
       <button
-        className="fixed bottom-8 left-8 w-16 h-16 rounded-full bg-pink-400 text-white text-4xl flex items-center justify-center shadow-lg hover:bg-pink-500 transition-colors"
+        className="fixed bottom-8 left-8 w-16 h-16 rounded-full text-white text-4xl flex items-center justify-center shadow-lg transition-colors"
+        style={{
+          backgroundColor: "var(--theme-primary, #FF69B4)"
+        }}
         aria-label="Adicionar"
         onClick={() => router.push("/add")}
       >

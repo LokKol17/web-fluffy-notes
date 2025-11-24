@@ -68,5 +68,47 @@ service cloud.firestore {
 }
 ```
 
+## 🎨 Sistema de Temas
+
+O Fluffy Notes possui um sistema de temas inspirado nos personagens da Sanrio:
+
+### Temas Disponíveis
+
+- **Hello Kitty** - Rosa fofo e adorável
+- **My Melody** - Rosa suave e delicado  
+- **Kuromi** - Roxo misterioso e elegante
+- **Cinnamonroll** - Bege aconchegante e caloroso
+- **Pompompurin** - Amarelo alegre e ensolarado
+- **Keroppi** - Verde fresco e natural
+- **Pochacco** - Azul tranquilo e sereno
+
+### Como Usar
+
+1. Clique no ícone de paleta na navbar
+2. Escolha seu personagem favorito da Sanrio
+3. O tema será aplicado automaticamente e salvo no localStorage
+
+### Adicionando Novos Temas
+
+Para adicionar um novo tema, edite o arquivo `components/theme-provider.tsx`:
+
+```typescript
+{
+  id: "novo-tema",
+  name: "Nome do Tema",
+  colors: {
+    primary: "#cor-principal",
+    secondary: "#cor-secundaria", 
+    accent: "#cor-destaque",
+    background: "#cor-fundo",
+    text: "#cor-texto",
+    cardBg: "#cor-card-transparente",
+  },
+  wallpaper: "/caminho-para-wallpaper.png",
+}
+```
+
+As imagens de fundo devem ser colocadas na pasta `public/`.
+
 ## Licença
 MIT

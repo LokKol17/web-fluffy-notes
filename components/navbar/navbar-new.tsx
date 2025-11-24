@@ -45,20 +45,16 @@ export const NavBar: FC = () => {
           </Link>
         </div>
         <div className="px-6 md:px-8 py-4 flex items-center gap-4">
-          <span className="font-semibold text-[#DC93BA] text-lg">
+          <ThemeSelector />
+          <span className="font-semibold text-lg" style={{ color: "var(--theme-primary, #DC93BA)" }}>
             {nickname || user.displayName || user.email || "Usuário"}
           </span>
-          <ThemeSelector />
-                      <button
-              className="font-bold py-2 px-4 rounded transition-colors"
-              style={{
-                backgroundColor: "var(--theme-primary, #FF69B4)",
-                color: "white"
-              }}
-              onClick={handleLogout}
-            >
-              Sair
-            </button>
+          <button
+            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition-colors"
+            onClick={handleLogout}
+          >
+            Sair
+          </button>
         </div>
       </nav>
     </div>

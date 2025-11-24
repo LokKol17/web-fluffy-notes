@@ -85,7 +85,7 @@ export default function EditNote() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
-            <form onSubmit={handleSubmit} className="bg-white/80 rounded-lg shadow-md p-8 w-full max-w-md flex flex-col gap-6">
+            <form onSubmit={handleSubmit} className="rounded-lg shadow-md p-8 w-full max-w-md flex flex-col gap-6" style={{ backgroundColor: "var(--theme-card-bg, #FFB6C180)" }}>
                 <h2 className="text-2xl font-bold text-center mb-2">Editar Nota</h2>
                 <div>
                     <label className="block mb-1 font-medium">Título</label>
